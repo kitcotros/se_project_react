@@ -1,0 +1,61 @@
+.modal {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: visibility 0.35s linear, opacity 0.35s linear;
+}
+
+.modal_is-opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__container {
+  background-color: white;
+  height: 610px;
+  width: 498px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal__image {
+  width: 498px;
+  height: 498px;
+  position: relative;
+}
+
+.modal__close-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 26px;
+  margin-right: 26px;
+}
+
+.modal__title {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  font-style: bold;
+  margin-top: 20px;
+  margin-left: 32px;
+}
+
+.modal__weather {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  font-style: bold;
+  margin-top: 12px;
+  margin-left: 32px;
+}
