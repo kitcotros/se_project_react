@@ -4,6 +4,12 @@
   font-weight: 700;
   font-style: bold;
   font-size: 20px;
+  justify-content: space-between;
+}
+
+.header__side {
+  display: flex;
+  align-items: center;
 }
 
 .header__logo {
@@ -11,7 +17,6 @@
 }
 
 .header__place {
-  margin-right: auto;
 }
 
 .header__add-clothes-btn {
@@ -22,6 +27,7 @@
   font-weight: 700;
   font-style: bold;
   font-size: 20px;
+  margin-left: 20px;
 }
 
 .header__username {
