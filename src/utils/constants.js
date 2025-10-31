@@ -15,6 +15,22 @@ const weatherConditionImages = {
       name: "default",
       image: new URL("../assets/day/default.png", import.meta.url).href,
     },
+    fog: {
+      name: "fog",
+      image: new URL("../assets/day/fog.png", import.meta.url).href,
+    },
+    rain: {
+      name: "rain",
+      image: new URL("../assets/day/rain.png", import.meta.url).href,
+    },
+    snow: {
+      name: "snow",
+      image: new URL("../assets/day/snow.png", import.meta.url).href,
+    },
+    thunderstorm: {
+      name: "thunderstorm",
+      image: new URL("../assets/day/storm.png", import.meta.url).href,
+    },
   },
   night: {
     clear: {
@@ -28,6 +44,22 @@ const weatherConditionImages = {
     default: {
       name: "default",
       image: new URL("../assets/night/default.png", import.meta.url).href,
+    },
+    fog: {
+      name: "fog",
+      image: new URL("../assets/night/fog.png", import.meta.url).href,
+    },
+    rain: {
+      name: "rain",
+      image: new URL("../assets/night/rain.png", import.meta.url).href,
+    },
+    snow: {
+      name: "snow",
+      image: new URL("../assets/night/snow.png", import.meta.url).href,
+    },
+    thundestorm: {
+      name: "thunderstorm",
+      image: new URL("../assets/night/storm.png", import.meta.url).href,
     },
   },
 };

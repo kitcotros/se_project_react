@@ -4,6 +4,7 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
 import "./App.css";
@@ -20,6 +21,10 @@ function App() {
   function handleOpenItemModal(card) {
     setActiveModal("item-modal");
     setSelectedCard(card);
+  }
+
+  function handleOpenAddGarmentModal() {
+    setActiveModal("add-garment-modal");
   }
 
   function handleCloseItemModal() {
@@ -51,7 +56,10 @@ function App() {
       value={{ currentTempUnit, handleTempUnitChange }}
     >
       <div className="app">
-        <Header weatherData={weatherData} />
+        <Header
+          weatherData={weatherData}
+          handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+        />
         <Main
           weatherData={weatherData}
           clothingItems={clothingItems}
@@ -59,6 +67,11 @@ function App() {
         />
         <Footer />
         <ItemModal card={selectedCard} isOpen={activeModal === "item-modal"} />
+        <ModalWithForm
+          isOpen={activeModal === "add-garment-modal"}
+          title={"New garment"}
+          buttonText={"Add garment"}
+        />
       </div>
     </CurrentTemperatureUnitContext.Provider>
   );

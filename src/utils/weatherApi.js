@@ -25,10 +25,22 @@ function parseWeatherData(data) {
 
   parsedData.isDay = isDay(data.sys, Date.now());
 
+  parsedData.templevel = getWeatherCondition(parsedData.temp.F);
+
   return parsedData;
 }
 
 function isDay({ sunrise, sunset }, timestamp) {
   const timestampInSeconds = 1000 * timestamp;
   return sunrise < timestampInSeconds && timestampInSeconds < sunset;
+}
+
+function getWeatherCondition(temp) {
+  if (temp >= 89) {
+    return "hot";
+  } else if (temp >= 66) {
+    return "warm";
+  } else {
+    return "cold";
+  }
 }

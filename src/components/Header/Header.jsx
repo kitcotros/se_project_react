@@ -4,7 +4,7 @@ import "./Header.css";
 
 import { ToggleSwitch } from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ weatherData }) {
+function Header({ weatherData, handleOpenAddGarmentModal }) {
   const now = new Date();
   const dateStr = now.toLocaleString("default", {
     month: "long",
@@ -24,7 +24,12 @@ function Header({ weatherData }) {
       </div>
       <div className="header__side">
         <ToggleSwitch />
-        <button className="header__add-clothes-btn">+ Add clothes</button>
+        <button
+          onClick={handleOpenAddGarmentModal}
+          className="header__add-clothes-btn"
+        >
+          + Add clothes
+        </button>
         <p className="header__username">Terrence Tegegne</p>
         <img
           src={avatar}

@@ -4,6 +4,14 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import "./Main.css";
 
 function Main({ clothingItems, handleOpenItemModal, weatherData }) {
+  const filteredClothes = clothingItems.filter((item) => {
+    if (item.weather === weatherData.templevel) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
@@ -11,7 +19,7 @@ function Main({ clothingItems, handleOpenItemModal, weatherData }) {
         Today is {weatherData.temp.F}&deg; F / You may want to wear:
       </p>
       <ul className="main__card-list">
-        {clothingItems.map((item) => {
+        {filteredClothes.map((item) => {
           return (
             <ItemCard
               key={item._id}
