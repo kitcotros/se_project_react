@@ -65,3 +65,13 @@
   max-width: 496px;
   width: 100%;
 }
+
+.modal__input {
+  display: block;
+}
+
+.modal__fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}

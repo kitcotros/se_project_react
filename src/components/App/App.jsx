@@ -69,9 +69,21 @@ function App() {
         <ItemModal card={selectedCard} isOpen={activeModal === "item-modal"} />
         <ModalWithForm
           isOpen={activeModal === "add-garment-modal"}
-          title={"New garment"}
-          buttonText={"Add garment"}
-        />
+          title="New garment"
+          buttonText="Add garment"
+          name="add-garment-form"
+        >
+          <fieldset className="modal__fieldset">
+            <label htmlFor="" className="modal__label">
+              Name
+              <input type="text" className="modal__input" />
+            </label>
+            <label htmlFor="" className="modal__label">
+              Image
+              <input type="url" className="modal__input" />
+            </label>
+          </fieldset>
+        </ModalWithForm>
       </div>
     </CurrentTemperatureUnitContext.Provider>
   );
