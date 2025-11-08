@@ -5,11 +5,13 @@ import Main from "../Main/Main.jsx";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import Profile from "../Profile/Profile.jsx";
 
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
 import "./App.css";
 import { getWeatherData } from "../../utils/weatherApi.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -60,11 +62,19 @@ function App() {
           weatherData={weatherData}
           handleOpenAddGarmentModal={handleOpenAddGarmentModal}
         />
-        <Main
-          weatherData={weatherData}
-          clothingItems={clothingItems}
-          handleOpenItemModal={handleOpenItemModal}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                weatherData={weatherData}
+                clothingItems={clothingItems}
+                handleOpenItemModal={handleOpenItemModal}
+              />
+            }
+          ></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+        </Routes>
         <Footer />
         <ItemModal
           card={selectedCard}

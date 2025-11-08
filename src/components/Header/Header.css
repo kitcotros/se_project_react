@@ -30,6 +30,12 @@
   margin-left: 20px;
 }
 
+.header__link {
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+
 .header__username {
   margin-left: 20px;
   margin-right: 12px;
