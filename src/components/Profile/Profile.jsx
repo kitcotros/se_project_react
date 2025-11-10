@@ -4,10 +4,10 @@ import "./Profile.css";
 
 function Profile() {
   return (
-    <div className="profile">
+    <main className="profile">
       <SideBar />
       <ClothesSection />
-    </div>
+    </main>
   );
 }
 

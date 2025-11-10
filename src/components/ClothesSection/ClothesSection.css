@@ -1,0 +1,4 @@
+.clothes-section__row {
+  display: flex;
+  gap: 20px;
+}
