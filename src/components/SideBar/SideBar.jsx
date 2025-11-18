@@ -8,9 +8,9 @@ function SideBar() {
         <img
           src={avatar}
           alt="Terrence Tegegne's avatar"
-          className="header__avatar"
+          className="header__avatar sidebar__avatar"
         />
-        <p className="header__username">Terrence Tegegne</p>
+        <p className="header__username sidebar__username">Terrence Tegegne</p>
       </div>
     </aside>
   );
