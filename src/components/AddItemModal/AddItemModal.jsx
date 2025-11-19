@@ -1,13 +1,34 @@
+import { useRef } from "react";
+import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ activeModal, handleCloseModal }) {
+function AddItemModal({ isOpen, handleCloseModal, handleAddItemSubmit }) {
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    weather: "hot",
+    link: "",
+  });
+
+  const initialForm = {
+    name: "",
+    weather: "hot",
+    link: "",
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAddItemSubmit(values);
+    setValues(initialForm);
+  };
+
   return (
     <ModalWithForm
-      isOpen={activeModal === "add-garment-modal"}
+      isOpen={isOpen}
       title="New garment"
       buttonText="Add garment"
       name="add-garment-form"
       onXClick={handleCloseModal}
+      handleSubmit={handleSubmit}
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="add-garment-name-input" className="modal__label">
@@ -17,6 +38,9 @@ function AddItemModal({ activeModal, handleCloseModal }) {
             type="text"
             placeholder="Name"
             className="modal__input"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
           />
         </label>
         <label htmlFor="add-garment-link-input" className="modal__label">
@@ -26,6 +50,9 @@ function AddItemModal({ activeModal, handleCloseModal }) {
             type="url"
             placeholder="Image URL"
             className="modal__input"
+            name="link"
+            value={values.link}
+            onChange={handleChange}
           />
         </label>
       </fieldset>
@@ -39,6 +66,8 @@ function AddItemModal({ activeModal, handleCloseModal }) {
             id="hot"
             name="weather"
             value="hot"
+            checked={values.weather === "hot"}
+            onChange={handleChange}
           />
           <label className="modal__label" htmlFor="hot">
             Hot
@@ -52,6 +81,8 @@ function AddItemModal({ activeModal, handleCloseModal }) {
             id="warm"
             name="weather"
             value="warm"
+            checked={values.weather === "warm"}
+            onChange={handleChange}
           />
           <label className="modal__label" htmlFor="warm">
             Warm
@@ -65,6 +96,8 @@ function AddItemModal({ activeModal, handleCloseModal }) {
             id="cold"
             name="weather"
             value="cold"
+            checked={values.weather === "cold"}
+            onChange={handleChange}
           />
           <label className="modal__label" htmlFor="cold">
             Cold
