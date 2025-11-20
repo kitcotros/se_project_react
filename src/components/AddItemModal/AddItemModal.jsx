@@ -6,13 +6,13 @@ function AddItemModal({ isOpen, handleCloseModal, handleAddItemSubmit }) {
   const { values, handleChange, setValues } = useForm({
     name: "",
     weather: "hot",
-    link: "",
+    imageUrl: "",
   });
 
   const initialForm = {
     name: "",
     weather: "hot",
-    link: "",
+    imageUrl: "",
   };
 
   const handleSubmit = (event) => {
@@ -50,8 +50,8 @@ function AddItemModal({ isOpen, handleCloseModal, handleAddItemSubmit }) {
             type="url"
             placeholder="Image URL"
             className="modal__input"
-            name="link"
-            value={values.link}
+            name="imageUrl"
+            value={values.imageUrl}
             onChange={handleChange}
           />
         </label>

@@ -7,6 +7,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 
+import { getItems, addItem } from "../../utils/api.js";
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
 import "./App.css";
 import { getWeatherData } from "../../utils/weatherApi.js";
@@ -42,9 +43,12 @@ function App() {
   }
 
   function handleAddItemSubmit(inputValues) {
-    console.log(inputValues);
-    setClothingItems([inputValues, ...clothingItems]);
-    handleCloseModal();
+    addItem(inputValues)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch(console.error);
   }
 
   useEffect(() => {
@@ -56,7 +60,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setClothingItems(defaultClothingItems);
+    getItems()
+      .then((items) => {
+        setClothingItems(items.reverse());
+      })
+      .catch(console.error);
   }, []);
 
   return (
