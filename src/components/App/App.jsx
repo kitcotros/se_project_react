@@ -7,7 +7,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 
-import { getItems, addItem } from "../../utils/api.js";
+import { getItems, addItem, deleteItem } from "../../utils/api.js";
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
 import "./App.css";
 import { getWeatherData } from "../../utils/weatherApi.js";
@@ -51,6 +51,14 @@ function App() {
       .catch(console.error);
   }
 
+  function handleDeleteItemSubmit(item) {
+    deleteItem(item._id)
+      .then(() => {
+        handleCloseModal();
+      })
+      .catch(console.error);
+  }
+
   useEffect(() => {
     getWeatherData()
       .then((data) => {
@@ -65,7 +73,7 @@ function App() {
         setClothingItems(items.reverse());
       })
       .catch(console.error);
-  }, []);
+  }, [clothingItems]);
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -103,6 +111,7 @@ function App() {
           card={selectedCard}
           isOpen={activeModal === "item-modal"}
           onXClick={handleCloseModal}
+          handleDeleteItemSubmit={handleDeleteItemSubmit}
         />
         <AddItemModal
           isOpen={activeModal === "add-garment-modal"}
