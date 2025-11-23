@@ -1,5 +1,5 @@
 import avatar from "../../assets/terrence-avatar.svg";
-import "./sidebar.css";
+import "./SideBar.css";
 
 function SideBar() {
   return (
