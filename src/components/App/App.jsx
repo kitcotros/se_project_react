@@ -54,6 +54,11 @@ function App() {
   function handleDeleteItemSubmit(item) {
     deleteItem(item._id)
       .then(() => {
+        getItems()
+          .then((items) => {
+            setClothingItems(items.reverse());
+          })
+          .catch(console.error);
         handleCloseModal();
       })
       .catch(console.error);
@@ -73,7 +78,7 @@ function App() {
         setClothingItems(items.reverse());
       })
       .catch(console.error);
-  }, [clothingItems]);
+  }, []);
 
   return (
     <CurrentTemperatureUnitContext.Provider
