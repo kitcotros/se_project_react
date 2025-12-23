@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./RegisterModal.css";
 
 function RegisterModal({ isOpen, handleCloseModal }) {
   const [data, setData] = useState({
@@ -29,10 +30,11 @@ function RegisterModal({ isOpen, handleCloseModal }) {
       name="register-form"
       onXClick={handleCloseModal}
       handleSubmit={handleSubmit}
+      className="register"
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="register-email-input" className="modal__label">
-          Name
+          Email *
           <input
             id="register-email-input"
             type="email"
@@ -41,10 +43,11 @@ function RegisterModal({ isOpen, handleCloseModal }) {
             name="email"
             value={data.email}
             onChange={handleChange}
+            required
           />
         </label>
         <label htmlFor="register-password-input" className="modal__label">
-          Image
+          Password *
           <input
             id="register-password-input"
             type="password"
@@ -53,10 +56,11 @@ function RegisterModal({ isOpen, handleCloseModal }) {
             name="password"
             value={data.password}
             onChange={handleChange}
+            required
           />
         </label>
         <label htmlFor="register-name-input" className="modal__label">
-          Image
+          Name *
           <input
             id="register-name-input"
             type="text"
@@ -65,10 +69,11 @@ function RegisterModal({ isOpen, handleCloseModal }) {
             name="name"
             value={data.name}
             onChange={handleChange}
+            required
           />
         </label>
         <label htmlFor="register-avatar-url-input" className="modal__label">
-          Image
+          Avatar URL
           <input
             id="register-avatar-url-input"
             type="url"

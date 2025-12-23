@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
 function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
   const [data, setData] = useState({
@@ -30,6 +31,7 @@ function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
       name="login-form"
       onXClick={handleCloseModal}
       handleSubmit={handleSubmit}
+      className="login"
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="login-email-input" className="modal__label">
@@ -45,7 +47,7 @@ function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
           />
         </label>
         <label htmlFor="login-password-input" className="modal__label">
-          Image
+          Password
           <input
             id="login-password-input"
             type="password"

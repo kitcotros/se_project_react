@@ -17,7 +17,7 @@ import "./App.css";
 import { getWeatherData } from "../../utils/weatherApi.js";
 import { setToken, getToken } from "../../utils/token.js";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -166,8 +166,11 @@ function App() {
         <Header
           weatherData={weatherData}
           handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+          handleOpenLoginModal={handleOpenLoginModal}
+          handleOpenRegisterModal={handleOpenRegisterModal}
         />
         <Routes>
+          <Route path="*" element={<Navigate to="/" replace />}></Route>
           <Route
             path="/"
             element={
@@ -206,10 +209,12 @@ function App() {
         <LoginModal
           isOpen={activeModal === "login-modal"}
           handleCloseModal={handleCloseModal}
+          handleLogin={handleLogin}
         />
         <RegisterModal
           isOpen={activeModal === "register-modal"}
           handleCloseModal={handleCloseModal}
+          handleRegistration={handleRegistration}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

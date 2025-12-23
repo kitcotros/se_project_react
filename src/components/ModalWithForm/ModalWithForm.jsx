@@ -8,10 +8,11 @@ function ModalWithForm({
   buttonText,
   name,
   onXClick,
+  className,
 }) {
   return (
     <div className={`modal${isOpen ? " modal_is-opened" : ""}`}>
-      <div className="modal__container modal__container_type_form">
+      <div className={`modal__container modal__container_type_${className}`}>
         <h2 className="modal__title modal__title_type_form">{title}</h2>
         <button
           onClick={onXClick}

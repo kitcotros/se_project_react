@@ -28,6 +28,7 @@ function AddItemModal({ isOpen, handleCloseModal, handleAddItemSubmit }) {
       name="add-garment-form"
       onXClick={handleCloseModal}
       handleSubmit={handleSubmit}
+      className="form"
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="add-garment-name-input" className="modal__label">
