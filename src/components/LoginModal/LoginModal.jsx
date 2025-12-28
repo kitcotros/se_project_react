@@ -4,7 +4,7 @@ import "./LoginModal.css";
 
 function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
   const [data, setData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -21,6 +21,10 @@ function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(data);
+    setData({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -35,7 +39,7 @@ function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="login-email-input" className="modal__label">
-          Name
+          Email
           <input
             id="login-email-input"
             type="email"

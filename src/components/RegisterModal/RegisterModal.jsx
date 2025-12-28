@@ -2,12 +2,12 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-function RegisterModal({ isOpen, handleCloseModal }) {
+function RegisterModal({ isOpen, handleCloseModal, handleRegistration }) {
   const [data, setData] = useState({
     email: "",
     password: "",
     name: "",
-    avatarUrl: "",
+    avatar: "",
   });
 
   const handleChange = (e) => {
@@ -20,13 +20,20 @@ function RegisterModal({ isOpen, handleCloseModal }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    handleRegistration(data);
+    setData({
+      email: "",
+      password: "",
+      name: "",
+      avatar: "",
+    });
   };
 
   return (
     <ModalWithForm
       isOpen={isOpen}
       title="Sign up"
-      buttonText="Next"
+      buttonText="Sign Up"
       name="register-form"
       onXClick={handleCloseModal}
       handleSubmit={handleSubmit}
@@ -79,8 +86,8 @@ function RegisterModal({ isOpen, handleCloseModal }) {
             type="url"
             placeholder="Avatar URL"
             className="modal__input"
-            name="avatarUrl"
-            value={data.avatarUrl}
+            name="avatar"
+            value={data.avatar}
             onChange={handleChange}
           />
         </label>

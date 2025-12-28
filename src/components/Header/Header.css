@@ -48,6 +48,12 @@
   cursor: pointer;
 }
 
+.header__avatar {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
 .header__button {
   margin-left: 20px;
   margin-bottom: 0;
