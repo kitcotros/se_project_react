@@ -8,9 +8,16 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
-import { getItems, addItem, deleteItem, getUserInfo } from "../../utils/api.js";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  getUserInfo,
+  editUserInfo,
+} from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
 import "./App.css";
@@ -64,6 +71,8 @@ function App() {
       .catch(console.error);
   };
 
+  function handleEditProfileSubmit(inputValues) {}
+
   function handleOpenItemModal(card) {
     setActiveModal("item-modal");
     setSelectedCard(card);
@@ -79,6 +88,10 @@ function App() {
 
   function handleOpenLoginModal() {
     setActiveModal("login-modal");
+  }
+
+  function handleOpenEditProfileModal() {
+    setActiveModal("edit-profile-modal");
   }
 
   function handleCloseModal() {
@@ -181,6 +194,7 @@ function App() {
                     clothingItems={clothingItems}
                     handleOpenItemModal={handleOpenItemModal}
                     handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+                    handleOpenEditProfileModal={handleOpenEditProfileModal}
                   />
                 </ProtectedRoute>
               }
@@ -207,6 +221,11 @@ function App() {
             isOpen={activeModal === "register-modal"}
             handleCloseModal={handleCloseModal}
             handleRegistration={handleRegistration}
+          />
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile-modal"}
+            handleCloseModal={handleCloseModal}
+            handleEditProfileSubmit={handleEditProfileSubmit}
           />
         </div>
       </CurrentUserContext.Provider>

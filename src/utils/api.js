@@ -46,4 +46,20 @@ const getUserInfo = (token) => {
   });
 };
 
-export { getItems, addItem, deleteItem, getUserInfo };
+const editUserInfo = (token, name, avatar) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      // Specify an authorization header with an appropriately
+      // formatted value.
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  });
+};
+
+export { getItems, addItem, deleteItem, getUserInfo, editUserInfo };

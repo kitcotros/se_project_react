@@ -1,0 +1,14 @@
+.modal__submit-btn {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.modal__container_type_login {
+  max-width: 440px;
+  height: 240px;
+  padding: 28px 28px 36px;
+}
+
+.modal__input:last-of-type {
+  margin-bottom: 32px;
+}

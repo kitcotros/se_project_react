@@ -16,8 +16,6 @@ function LoginModal({ isOpen, handleCloseModal, handleLogin }) {
     }));
   };
 
-  // handleSubmit prevents the default browser behavior and calls
-  // the login handler.
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(data);

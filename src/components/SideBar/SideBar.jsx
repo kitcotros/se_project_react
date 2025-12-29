@@ -1,17 +1,27 @@
-import avatar from "../../assets/terrence-avatar.svg";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./SideBar.css";
 
-function SideBar() {
+function SideBar({ handleOpenEditProfileModal }) {
+  const { userData } = useContext(CurrentUserContext);
+
   return (
     <aside className="sidebar">
       <div className="sidebar__row">
         <img
-          src={avatar}
-          alt="Terrence Tegegne's avatar"
+          src={userData.avatar}
+          alt="Your avatar"
           className="header__avatar sidebar__avatar"
         />
-        <p className="header__username sidebar__username">Terrence Tegegne</p>
+        <p className="header__username sidebar__username">{userData.name}</p>
       </div>
+      <button
+        onClick={handleOpenEditProfileModal}
+        className="sidebar__changeprofile"
+      >
+        Change profile data
+      </button>
+      <button className="sidebar__logout">Log out</button>
     </aside>
   );
 }
