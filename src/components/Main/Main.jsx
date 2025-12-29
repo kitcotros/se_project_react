@@ -3,7 +3,12 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 
 import "./Main.css";
 
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 function Main({ clothingItems, handleOpenItemModal, weatherData }) {
+  const { userData } = useContext(CurrentUserContext);
+
   const filteredClothes = clothingItems.filter((item) => {
     if (item.weather === weatherData.templevel) {
       return true;

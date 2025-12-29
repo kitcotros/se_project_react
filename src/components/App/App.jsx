@@ -34,7 +34,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({ name: "", temp: "0" });
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ name: "", avatar: "" });
+  const [userData, setUserData] = useState({ name: "", avatar: "", _id: "" });
 
   const navigate = useNavigate();
 
@@ -71,7 +71,32 @@ function App() {
       .catch(console.error);
   };
 
-  function handleEditProfileSubmit(inputValues) {}
+  function handleEditProfileSubmit(values) {
+    const token = localStorage.getItem("jwt");
+
+    const userData = {};
+
+    if (values.name && values.name.trim() !== "") {
+      userData.name = values.name;
+    }
+
+    if (values.avatar && values.avatar.trim() !== "") {
+      userData.avatar = values.avatar;
+    }
+
+    editUserInfo(token, userData)
+      .then((data) => {
+        setUserData(data);
+        handleCloseModal();
+      })
+      .catch(console.error);
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    navigate("/");
+  }
 
   function handleOpenItemModal(card) {
     setActiveModal("item-modal");
@@ -107,16 +132,25 @@ function App() {
   }
 
   function handleAddItemSubmit(inputValues) {
-    addItem(inputValues)
+    const token = localStorage.getItem("jwt");
+
+    addItem(inputValues, token)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
         handleCloseModal();
+      })
+      .then(() => {
+        getItems().then((items) => {
+          setClothingItems(items);
+        });
       })
       .catch(console.error);
   }
 
   function handleDeleteItemSubmit(item) {
-    deleteItem(item._id)
+    const token = localStorage.getItem("jwt");
+
+    deleteItem(item._id, token)
       .then(() => {
         getItems()
           .then((items) => {
@@ -138,10 +172,9 @@ function App() {
     // TODO - handle JWT
 
     getUserInfo(jwt)
-      .then(({ name, avatar }) => {
+      .then(({ name, avatar, _id }) => {
         setIsLoggedIn(true);
-        setUserData({ name, avatar });
-        navigate("/");
+        setUserData({ name, avatar, _id });
       })
       .catch(console.error);
   }, []);
@@ -195,6 +228,7 @@ function App() {
                     handleOpenItemModal={handleOpenItemModal}
                     handleOpenAddGarmentModal={handleOpenAddGarmentModal}
                     handleOpenEditProfileModal={handleOpenEditProfileModal}
+                    handleLogout={handleLogout}
                   />
                 </ProtectedRoute>
               }

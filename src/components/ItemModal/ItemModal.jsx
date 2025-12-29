@@ -1,10 +1,21 @@
 import "./ItemModal.css";
 import xicon from "../../assets/x-icon.svg";
 
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 function ItemModal({ card, isOpen, onXClick, handleDeleteItemSubmit }) {
   function handleDelete() {
     handleDeleteItemSubmit(card);
   }
+
+  const { userData } = useContext(CurrentUserContext);
+
+  console.log("Current user id", userData?._id);
+  console.log("Card owner:", card?.owner);
+  console.log("Owner type:", typeof card?.owner);
+
+  const isOwn = userData?._id === card?.owner?._id;
 
   return (
     <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
@@ -17,7 +28,12 @@ function ItemModal({ card, isOpen, onXClick, handleDeleteItemSubmit }) {
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
           <div>
-            <button onClick={handleDelete} className="modal__delete-btn">
+            <button
+              onClick={handleDelete}
+              className={`modal__delete-btn ${
+                isOwn ? `` : `modal__delete-btn_hidden`
+              }`}
+            >
               Delete item
             </button>
           </div>
