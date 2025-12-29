@@ -27,7 +27,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({ name: "", temp: "0" });
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ username: "", avatar: "" });
+  const [userData, setUserData] = useState({ name: "", avatar: "" });
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ function App() {
     console.log(email);
 
     auth
-      .register(name, avatar, password, email)
+      .register(name, avatar, email, password)
       .then(() => {
         // TODO: handle succesful registration
         handleCloseModal();
@@ -44,26 +44,21 @@ function App() {
       .catch(console.error);
   };
 
-  // handleLogin accepts one parameter: an object with two properties.
   const handleLogin = ({ email, password }) => {
-    // If username or password empty, return without sending a request.
     if (!email || !password) {
       return;
     }
 
-    // We pass the username and password as positional arguments. The
-    // authorize function is set up to rename `username` to `identifier`
-    // before sending a request to the server, because that is what the
-    // API is expecting.
     auth
       .authorize(email, password)
       .then((data) => {
-        // Verify that a jwt is included before logging the user in.
-        if (data.jwt) {
-          setToken(data.jwt);
+        console.log("LOGIN RESPONSE:", data);
+        if (data.token) {
+          setToken(data.token);
           setUserData(data.user);
-          setIsLoggedIn(true); // log the user in
-          navigate("/"); // send them to /ducks
+          setIsLoggedIn(true);
+          handleCloseModal();
+          navigate("/");
         }
       })
       .catch(console.error);
@@ -130,9 +125,9 @@ function App() {
     // TODO - handle JWT
 
     getUserInfo(jwt)
-      .then(({ username, avatar }) => {
+      .then(({ name, avatar }) => {
         setIsLoggedIn(true);
-        setUserData({ username, avatar });
+        setUserData({ name, avatar });
         navigate("/");
       })
       .catch(console.error);

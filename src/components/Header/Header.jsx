@@ -38,8 +38,14 @@ function Header({
         </div>
         <div className="header__side">
           <ToggleSwitch />
+          <button
+            onClick={handleOpenAddGarmentModal}
+            className="header__add-clothes-btn"
+          >
+            + Add clothes
+          </button>
           <Link className="header__link" to="/profile">
-            <p className="header__username">{userData.username}</p>
+            <p className="header__username">{userData.name}</p>
             <img
               src={userData.avatar}
               alt="Your avatar"

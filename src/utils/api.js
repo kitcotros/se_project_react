@@ -32,7 +32,7 @@ function deleteItem(id) {
 // getContent accepts the token as an argument.
 const getUserInfo = (token) => {
   // Send a GET request to /users/me
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",
