@@ -1,5 +1,11 @@
 const coordinates = { lat: "35.196109", lon: "-89.679462" };
+
 const apiKey = "34bdb11698303a702c9b9355e4bd3631";
+
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.kitroswtwr.soon.it"
+    : "http://localhost:3001";
 
 const weatherConditionImages = {
   day: {
@@ -64,4 +70,4 @@ const weatherConditionImages = {
   },
 };
 
-export { coordinates, apiKey, weatherConditionImages };
+export { coordinates, apiKey, BASE_URL, weatherConditionImages };

@@ -6,7 +6,12 @@ import "./Main.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Main({ clothingItems, handleOpenItemModal, weatherData }) {
+function Main({
+  clothingItems,
+  handleOpenItemModal,
+  weatherData,
+  handleCardLike,
+}) {
   const { userData } = useContext(CurrentUserContext);
 
   const filteredClothes = clothingItems.filter((item) => {
@@ -30,6 +35,7 @@ function Main({ clothingItems, handleOpenItemModal, weatherData }) {
               key={item._id}
               data={item}
               onCardClick={handleOpenItemModal}
+              onCardLike={handleCardLike}
             />
           );
         })}

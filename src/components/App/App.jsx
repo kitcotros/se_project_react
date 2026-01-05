@@ -17,6 +17,8 @@ import {
   deleteItem,
   getUserInfo,
   editUserInfo,
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api.js";
 import * as auth from "../../utils/auth.js";
 import { defaultClothingItems } from "../../utils/defaultClothingItems.js";
@@ -162,6 +164,35 @@ function App() {
       .catch(console.error);
   }
 
+  const handleCardLike = (card) => {
+    const token = localStorage.getItem("jwt");
+    const isLiked = card.likes.includes(userData._id);
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        // the first argument is the card's id
+        addCardLike(card._id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) =>
+                item._id === card._id ? updatedCard.data : item
+              )
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        // the first argument is the card's id
+        removeCardLike(card._id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) =>
+                item._id === card._id ? updatedCard.data : item
+              )
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     const jwt = getToken();
 
@@ -216,6 +247,7 @@ function App() {
                   weatherData={weatherData}
                   clothingItems={clothingItems}
                   handleOpenItemModal={handleOpenItemModal}
+                  handleCardLike={handleCardLike}
                 />
               }
             ></Route>
@@ -229,6 +261,7 @@ function App() {
                     handleOpenAddGarmentModal={handleOpenAddGarmentModal}
                     handleOpenEditProfileModal={handleOpenEditProfileModal}
                     handleLogout={handleLogout}
+                    handleCardLike={handleCardLike}
                   />
                 </ProtectedRoute>
               }

@@ -1,13 +1,13 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "./constants";
 
 function getItems() {
-  return fetch(`${baseUrl}/items`).then((res) => {
+  return fetch(`${BASE_URL}/items`).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 }
 
 function addItem({ name, imageUrl, weather }, token) {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ function addItem({ name, imageUrl, weather }, token) {
 }
 
 function deleteItem(id, token) {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +34,7 @@ function deleteItem(id, token) {
 // getContent accepts the token as an argument.
 const getUserInfo = (token) => {
   // Send a GET request to /users/me
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -49,7 +49,7 @@ const getUserInfo = (token) => {
 };
 
 const editUserInfo = (token, data) => {
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -64,4 +64,34 @@ const editUserInfo = (token, data) => {
   });
 };
 
-export { getItems, addItem, deleteItem, getUserInfo, editUserInfo };
+const addCardLike = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      // Specify an authorization header with an appropriately
+      // formatted value.
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  });
+};
+
+const removeCardLike = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      // Specify an authorization header with an appropriately
+      // formatted value.
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  });
+};
+
+export { getItems, addItem, deleteItem, getUserInfo, editUserInfo, addCardLike, removeCardLike };

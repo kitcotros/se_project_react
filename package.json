@@ -3,12 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://kitroswtwr.soon.it",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "json-server": "json-server --watch db.json --id _id --port 3001"
+    "json-server": "json-server --watch db.json --id _id --port 3001",
+    "deploy": "npm run build && scp -r ./dist/* kitcotros2@kitroswtwr.soon.it:/home/kitcotros2/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
