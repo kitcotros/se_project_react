@@ -11,10 +11,6 @@ function ItemModal({ card, isOpen, onXClick, handleDeleteItemSubmit }) {
 
   const { userData } = useContext(CurrentUserContext);
 
-  console.log("Current user id", userData?._id);
-  console.log("Card owner:", card?.owner);
-  console.log("Owner type:", typeof card?.owner);
-
   const isOwn = userData?._id === card?.owner?._id;
 
   return (

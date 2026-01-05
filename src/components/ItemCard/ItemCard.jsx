@@ -13,7 +13,9 @@ function ItemCard({ data, onCardClick, onCardLike }) {
     onCardLike(data);
   }
 
-  const isLiked = data.likes.includes(userData._id);
+  const isLiked = data.likes.some((user) =>
+    typeof user === "string" ? user === userData._id : user._id === userData._id
+  );
 
   return (
     <li className="card">

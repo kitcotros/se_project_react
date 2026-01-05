@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -36,6 +36,7 @@ function App() {
   const [weatherData, setWeatherData] = useState({ name: "", temp: "0" });
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [userData, setUserData] = useState({ name: "", avatar: "", _id: "" });
 
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ function App() {
           setIsLoggedIn(true);
           handleCloseModal();
           navigate("/");
+          window.location.reload(true); // added this because likes weren't working unless the page was reloaded
         }
       })
       .catch(console.error);
@@ -166,7 +168,11 @@ function App() {
 
   const handleCardLike = (card) => {
     const token = localStorage.getItem("jwt");
-    const isLiked = card.likes.includes(userData._id);
+    const isLiked = card.likes.some((user) =>
+      typeof user === "string"
+        ? user === userData._id
+        : user._id === userData._id
+    );
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
@@ -174,9 +180,7 @@ function App() {
         addCardLike(card._id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) =>
-                item._id === card._id ? updatedCard.data : item
-              )
+              cards.map((item) => (item._id === card._id ? updatedCard : item))
             );
           })
           .catch((err) => console.log(err))
@@ -185,9 +189,7 @@ function App() {
         removeCardLike(card._id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) =>
-                item._id === card._id ? updatedCard.data : item
-              )
+              cards.map((item) => (item._id === card._id ? updatedCard : item))
             );
           })
           .catch((err) => console.log(err));
@@ -197,6 +199,7 @@ function App() {
     const jwt = getToken();
 
     if (!jwt) {
+      setIsAuthLoading(false);
       return;
     }
 
@@ -206,8 +209,12 @@ function App() {
       .then(({ name, avatar, _id }) => {
         setIsLoggedIn(true);
         setUserData({ name, avatar, _id });
+        setIsAuthLoading(false);
       })
-      .catch(console.error);
+      .catch(() => {
+        setIsAuthLoading(false);
+        console.error;
+      });
   }, []);
 
   useEffect(() => {
@@ -254,7 +261,10 @@ function App() {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProtectedRoute
+                  isLoggedIn={isLoggedIn}
+                  isAuthLoading={isAuthLoading}
+                >
                   <Profile
                     clothingItems={clothingItems}
                     handleOpenItemModal={handleOpenItemModal}
